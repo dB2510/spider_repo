@@ -1,0 +1,38 @@
+initialFloorNumber = int(input())
+sequenceString = input() + ' '
+sequence = []
+def stringBreakToIntegers(str,x):
+    spam = ''
+    c=0
+    for i in range(len(str)):
+        if(str[i] != ' '):
+            spam = spam + str[i];
+        else:
+            x.append(int(spam))
+            spam = ''
+            c = c + 1
+stringBreakToIntegers(sequenceString,sequence)
+sequence.append(initialFloorNumber)
+def bubbleSort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if (arr[j] > arr[j + 1]):
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+index = 0
+bubbleSort(sequence)
+for i in range(len(sequence)):
+    if(initialFloorNumber == sequence[i]):
+        index = i
+        break
+order = []
+for i in range(index,len(sequence)):
+    order.append(sequence[i])
+for i in range(index-1,-1,-1):
+    order.append(sequence[i])
+sum = 0
+for i in range(len(order)-1):
+    sum = sum + abs(order[i] - order[i+1])
+for i in range(len(order)):
+    print(str(order[i]),end = ' ')
+print("\nTotal Distance: " + str(sum))

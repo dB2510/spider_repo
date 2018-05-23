@@ -1,0 +1,50 @@
+def loopFront(a,b,jump,start):
+    if((start+jump)<=b):
+        return (start+jump)
+    elif((start+jump)>b):
+        return (a + (b - (start + jump)))
+
+def loopBack(a,b,jump,start):
+    if((start-jump)>=a):
+        return (start-jump)
+    elif((start-jump)<a):
+        return (b - (a - (start - jump)))
+def encrypt(text,k):
+    encrpytedText=''
+    for i in range(len(text)):
+        if (ord(text[i])>=65 and ord(text[i])<=90):
+            encrpytedText = encrpytedText + chr(loopFront(65,90,k,ord(text[i])))
+        elif (ord(text[i])>=97 and ord(text[i])<=122):
+            encrpytedText = encrpytedText + chr(loopFront(97,122,k,ord(text[i])))
+        else:
+            encrpytedText = encrpytedText + text[i]
+    return encrpytedText
+def decrypt(text,k):
+    decryptedText=''
+    for i in range(len(text)):
+        if (ord(text[i])>=65 and ord(text[i])<=90):
+            decrpytedText = decrpytedText + chr(loopBack(65,90,k,ord(text[i])))
+        elif (ord(text[i])>=97 and ord(text[i])<=122):
+            decrpytedText = decrpytedText + chr(loopBack(97,122,k,ord(text[i])))
+        else:
+            decrpytedText = decrpytedText + text[i]
+    return decrpytedText
+def stringBreakToIntegers(str,x):
+    spam = ''
+    c=0
+    for i in range(len(str)):
+        if(str[i] != ' '):
+            spam = spam + str[i];
+        else:
+            x.append(int(spam))
+            spam = ''
+            c = c + 1
+spam = input()
+spam = spam + ' '
+nk = []
+stringBreakToIntegers(spam,nk)
+texts = []
+for i in range(nk[0]):
+    texts.append(input())
+for i in range(nk[0]):
+    print(encrypt(texts[i],nk[1]))
